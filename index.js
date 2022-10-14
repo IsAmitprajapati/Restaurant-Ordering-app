@@ -1,4 +1,4 @@
-import { menuArray } from "./data"
+import { menuArray } from "./data.js"
 
 let mainEl = document.getElementById("main")
 let products = document.getElementById("product")
@@ -8,6 +8,7 @@ let completeOrderBtnEl = document.getElementById("completeOrderBtn")
 let modelEl = document.getElementById("model")
 let userNameEl = document.getElementById("userName")
 let orderArray = []
+let isCompleted = false;
 
 
 
@@ -15,36 +16,40 @@ document.addEventListener("click", (e) => {
     // console.log(e.target.dataset.add)
     if (e.target.dataset.add) {
         OrderProduct(e.target.dataset.add)
-
-        if (orderArray) {
-            orderProductRender()
-        }
+        isCompleted = true;
+        
     }
     else if (e.target.dataset.remove) {
         removeOrder(e.target.dataset.remove)
     }
     else if (e.target.id == "completeOrderBtn" && orderArray) {
+        
         completeOrderClick()
     }
     else if (e.target.id == "star1") {
+        isCompleted = false;
         document.getElementById("star1").classList.remove("feedbackColor")
     }
     else if (e.target.id == "star2") {
+        isCompleted = false;
         document.getElementById("star1").classList.remove("feedbackColor")
         document.getElementById("star2").classList.remove("feedbackColor")
     }
     else if (e.target.id == "star3") {
+        isCompleted = false;
         document.getElementById("star1").classList.remove("feedbackColor")
         document.getElementById("star2").classList.remove("feedbackColor")
         document.getElementById("star3").classList.remove("feedbackColor")
     }
     else if (e.target.id == "star4") {
+        isCompleted = false;
         document.getElementById("star1").classList.remove("feedbackColor")
         document.getElementById("star2").classList.remove("feedbackColor")
         document.getElementById("star3").classList.remove("feedbackColor")
         document.getElementById("star4").classList.remove("feedbackColor")
     }
     else if (e.target.id == "star5") {
+        isCompleted = false;
         document.getElementById("star1").classList.remove("feedbackColor")
         document.getElementById("star2").classList.remove("feedbackColor")
         document.getElementById("star3").classList.remove("feedbackColor")
@@ -52,12 +57,12 @@ document.addEventListener("click", (e) => {
         document.getElementById("star5").classList.remove("feedbackColor")
     }
 
-
+if (orderArray && isCompleted) {
+            orderProductRender()
+}
 
 })
-function clean() {
-    orderArray = []
-}
+
 formEl.addEventListener("submit", (e) => {
     e.preventDefault()
     modelEl.style.display = "none"
